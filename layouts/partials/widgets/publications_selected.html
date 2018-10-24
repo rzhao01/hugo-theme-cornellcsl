@@ -1,11 +1,21 @@
 {{ $ := .root }}
 {{ $page := .page }}
+{{ $pubs_len := len (where $.Data.Pages "Type" "publication") }}
+{{ $pubs_sel_len := len (where (where $.Data.Pages "Type" "publication") ".Params.selected" true) }}
 
 <!-- Selected Publications widget -->
 <div class="row">
   <div class="col-xs-12 col-md-4 section-heading">
     <h1>{{ with $page.Title }}{{ . | markdownify }}{{ end }}</h1>
     {{ with $page.Params.subtitle }}<p>{{ . | markdownify }}</p>{{ end }}
+    {{ if or (gt $pubs_sel_len $page.Params.count) (gt $pubs_len $pubs_sel_len) }}
+    <p class="view-all">
+      <a href="{{ "/publication/" | relLangURL }}">
+        {{ i18n "more_publications" | markdownify }}
+        <i class="fa fa-angle-double-right"></i>
+      </a>
+    </p>
+    {{ end }}
   </div>
   <div class="col-xs-12 col-md-8">
     {{ with $page.Content }}<p>{{ . | markdownify }}</p>{{ end }}
