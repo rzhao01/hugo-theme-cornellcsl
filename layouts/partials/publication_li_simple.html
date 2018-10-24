@@ -1,14 +1,15 @@
 <li itemscope itemtype="http://schema.org/ScholarlyArticle">
   <i class="fa-li fa fa-file-text-o pub-icon" aria-hidden="true"></i>
-  <span class="pub-authors">
+  <span style="font-size:85%" class="pub-authors">
     {{ with .Params.authors }}
     <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">
     {{- delimit . "</span></span>, <span itemprop=\"author\" itemscope itemtype=\"http://schema.org/Person\"><span itemprop=\"name\">" | markdownify -}}
     {{ end -}}
-    </span></span>,
+    </span></span>
   </span>
-  <span itemprop="name"><i>{{ .Title | markdownify | plainify }}</i></span>, in
-  <span itemprop="isPartOf">{{ .Params.publication | markdownify }}</span>.
+  <br>
+  <span style="font-weight:bold" itemprop="name">{{ .Title | markdownify | plainify }}</span>, in
+  <span style="font-style:italic" itemprop="isPartOf">{{ .Params.publication | markdownify }}</span>.
   <time datetime = "{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">
     {{ .Date.Format "January, 2006" }}
   </time>
